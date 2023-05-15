@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Room
 import com.example.breakingnews.adapters.NewsAdapter
 import com.example.breakingnews.api.Instance
 import com.example.breakingnews.databinding.ActivityMainBinding
+import com.example.breakingnews.db.NewsDatabase
 import com.example.breakingnews.models.NewsResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -17,7 +19,9 @@ import kotlinx.coroutines.withContext
 
 
 class MainActivity : AppCompatActivity() {
-
+    companion object {
+        lateinit var db: NewsDatabase
+    }
     lateinit var binding: ActivityMainBinding
     private lateinit var newsAdapter: NewsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +34,11 @@ class MainActivity : AppCompatActivity() {
         val apiService = Instance.api
         newsList.adapter =newsAdapter
         newsList.layoutManager = LinearLayoutManager(this)
+
+        db = Room.databaseBuilder(
+            applicationContext,
+            NewsDatabase::class.java, "my-db"
+        ).build()
 
         GlobalScope.launch {
             val response: NewsResponse = apiService.getNews()
