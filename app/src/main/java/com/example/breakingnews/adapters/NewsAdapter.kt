@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.breakingnews.NewsDetailActivity
 import com.example.breakingnews.databinding.NewsItemBinding
 import com.example.breakingnews.models.NewsItem
 import java.text.SimpleDateFormat
@@ -20,6 +21,12 @@ class NewsAdapter(private val context: Context, private val newsList: List<NewsI
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val newsItem = newsList[position]
         holder.bind(newsItem)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, NewsDetailActivity::class.java)
+            intent.putExtra("newsItem", newsItem)
+            context.startActivity(intent)
+
+        }
     }
 
     override fun getItemCount(): Int {
