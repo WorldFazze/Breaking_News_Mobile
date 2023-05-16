@@ -5,4 +5,7 @@
     <item
         android:id="@+id/fvButton"
         android:title="Избранные" />
+    <item
+        android:id="@+id/deleteFavorites"
+        android:title="Очистить избранные" />
 </menu>

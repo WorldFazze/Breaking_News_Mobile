@@ -1,10 +1,13 @@
 package com.example.breakingnews
 
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.breakingnews.adapters.NewsAdapter
@@ -70,5 +73,24 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.fvButton -> {
+                val intent = Intent(this, FavoritesNewsActivity::class.java)
+                this.startActivity(intent)
+            }
+            R.id.deleteFavorites -> {
+                GlobalScope.launch {
+                    db.newsDao().deleteNews()
+                }
+            }
+        }
+        return true
     }
 }
