@@ -2,16 +2,20 @@ package com.example.breakingnews.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.content.res.Configuration
+import android.view.*
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.breakingnews.MainActivity
 import com.example.breakingnews.NewsDetailActivity
 import com.example.breakingnews.databinding.NewsItemBinding
 import com.example.breakingnews.models.NewsItem
+import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NewsAdapter(private val context: Context, private val newsList: List<NewsItem>) : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+class NewsAdapter(private val context: Context, private val newsList: List<NewsItem>) :
+    RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = NewsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,10 +26,30 @@ class NewsAdapter(private val context: Context, private val newsList: List<NewsI
         val newsItem = newsList[position]
         holder.bind(newsItem)
         holder.itemView.setOnClickListener {
-            val intent = Intent(context, NewsDetailActivity::class.java)
-            intent.putExtra("newsItem", newsItem)
-            context.startActivity(intent)
+            val display =
+                (context.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
+            val rotation = display.rotation
+            val config = context.resources.configuration
 
+            if (rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) {
+                if (config.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    val intent = Intent(context, NewsDetailActivity::class.java)
+                    intent.putExtra("newsItem", newsItem)
+                    context.startActivity(intent)
+                }
+            } else if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+                if (config.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    MainActivity.binding.detail.visibility = View.VISIBLE
+                    MainActivity.binding.title.text = newsItem.title
+                    MainActivity.binding.author.text = newsItem.creator?.get(0)
+                        ?: "Автор не указан"
+                    MainActivity.binding.date.text = newsItem.pubDate
+                    MainActivity.binding.content.text = newsItem.content
+                    MainActivity.binding.source.text = newsItem.source_id
+                    Picasso.get().load(newsItem.image_url).into(MainActivity.binding.image)
+
+                }
+            }
         }
     }
 
@@ -33,7 +57,8 @@ class NewsAdapter(private val context: Context, private val newsList: List<NewsI
         return newsList.size
     }
 
-    inner class ViewHolder(private val binding: NewsItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: NewsItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(newsItem: NewsItem) {
             binding.title.text = newsItem.title

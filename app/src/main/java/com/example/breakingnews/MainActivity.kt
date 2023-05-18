@@ -1,15 +1,21 @@
 package com.example.breakingnews
 
 
+import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.Menu
-import android.view.MenuItem
+import android.util.Log
+import android.view.*
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.breakingnews.adapters.NewsAdapter
 import com.example.breakingnews.api.Instance
@@ -26,19 +32,21 @@ import kotlinx.coroutines.withContext
 class MainActivity : AppCompatActivity() {
     companion object {
         lateinit var db: NewsDatabase
+        lateinit var binding: ActivityMainBinding
     }
     lateinit var news: List<NewsItem>
-    lateinit var binding: ActivityMainBinding
+    private lateinit var orientationEventListener: OrientationEventListener
     private lateinit var newsAdapter: NewsAdapter
+    lateinit var newsList: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var context = this
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val newsList = binding.NewsList
+        newsList = binding.NewsList
         newsAdapter = NewsAdapter(context, emptyList())
         val apiService = Instance.api
-        newsList.adapter =newsAdapter
+        newsList.adapter = newsAdapter
         newsList.layoutManager = LinearLayoutManager(this)
         db = Room.databaseBuilder(
             applicationContext,
@@ -86,6 +94,31 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        orientationEventListener = object : OrientationEventListener(this) {
+            override fun onOrientationChanged(orientation: Int) {
+                // Обрабатываем изменение ориентации экрана
+                if (orientation == ORIENTATION_UNKNOWN) {
+                    return
+                }
+
+                val rotation = windowManager.defaultDisplay.rotation
+                val newOrientation = when (rotation) {
+                    Surface.ROTATION_0 -> Configuration.ORIENTATION_PORTRAIT
+                    Surface.ROTATION_90 -> Configuration.ORIENTATION_LANDSCAPE
+                    Surface.ROTATION_180 -> Configuration.ORIENTATION_PORTRAIT
+                    Surface.ROTATION_270 -> Configuration.ORIENTATION_LANDSCAPE
+                    else -> Configuration.ORIENTATION_UNDEFINED
+                }
+
+                // Выполняем действия при изменении ориентации экрана
+                handleOrientationChange(newOrientation)
+            }
+        }
+
+        // Запускаем слушатель событий
+        orientationEventListener.enable()
+
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -110,7 +143,19 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
         outState.putParcelableArrayList("newsList", ArrayList(news))
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        // Отключаем слушатель событий при уничтожении активности
+        orientationEventListener.disable()
+    }
+
+    private fun handleOrientationChange(orientation: Int) {
+        // Пример: Блокируем ориентацию на портретную или ландшафтную, в зависимости от текущей ориентации
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            binding.detail.visibility = View.GONE
+        }
     }
 
 }
