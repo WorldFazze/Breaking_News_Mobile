@@ -1,5 +1,6 @@
 package com.example.breakingnews.main
 
+import android.os.Bundle
 import com.example.breakingnews.models.NewsItem
 
 class MainContract {
@@ -7,6 +8,7 @@ class MainContract {
         fun loadNews()
         fun deleteFavorites()
         fun performSearch(query: String)
+        fun restoreInstanceState(savedInstanceState: Bundle)
     }
 
     interface ViewInterface {

@@ -5,8 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.breakingnews.FavoritesNewsDetailActivity
-import com.example.breakingnews.NewsDetailActivity
+import com.example.breakingnews.favoritesNewsDetail.FavoritesNewsDetailActivity
 import com.example.breakingnews.databinding.NewsItemBinding
 import com.example.breakingnews.db.News
 import java.text.SimpleDateFormat

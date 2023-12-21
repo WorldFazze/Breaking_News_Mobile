@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.example.breakingnews.FavoritesNewsActivity
+import com.example.breakingnews.favoritesNews.FavoritesNewsActivity
 import com.example.breakingnews.R
 import com.example.breakingnews.adapters.NewsAdapter
 import com.example.breakingnews.databinding.ActivityMainBinding
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
         initializeDatabase()
         setupPresenter()
 
-        savedInstanceState?.let { restoreInstanceState(it) } ?: mainPresenter.loadNews()
+        savedInstanceState?.let { mainPresenter.restoreInstanceState(it) } ?: mainPresenter.loadNews()
 
         setListeners()
     }
@@ -58,14 +58,6 @@ class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
             applicationContext,
             NewsDatabase::class.java, "my-db"
         ).build()
-    }
-
-    private fun restoreInstanceState(savedInstanceState: Bundle) {
-        val restoredList = savedInstanceState.getParcelableArrayList<NewsItem>("newsList")
-        restoredList?.let {
-            news = it.toList()
-            displayNews(news)
-        }
     }
 
     private fun setListeners() {
@@ -127,7 +119,9 @@ class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelableArrayList("newsList", ArrayList(news))
+        if (::news.isInitialized) {
+            outState.putParcelableArrayList("newsList", ArrayList(news))
+        }
     }
 
     override fun onDestroy() {

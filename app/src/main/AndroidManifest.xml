@@ -15,11 +15,11 @@
         android:theme="@style/Theme.BreakingNews"
         tools:targetApi="31">
         <activity
-            android:name=".FavoritesNewsDetailActivity"
+            android:name=".favoritesNewsDetail.FavoritesNewsDetailActivity"
             android:exported="false"
             android:screenOrientation="sensor"/>
         <activity
-            android:name=".FavoritesNewsActivity"
+            android:name=".favoritesNews.FavoritesNewsActivity"
             android:exported="false"
             android:screenOrientation="sensor"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
