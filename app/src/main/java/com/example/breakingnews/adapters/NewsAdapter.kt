@@ -4,9 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.view.*
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.breakingnews.MainActivity
+import com.example.breakingnews.main.MainActivity
 import com.example.breakingnews.NewsDetailActivity
 import com.example.breakingnews.databinding.NewsItemBinding
 import com.example.breakingnews.models.NewsItem

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.example.breakingnews.main.MainActivity
 import com.example.breakingnews.databinding.ActivityNewsDetailBinding
 import com.example.breakingnews.db.News
 import com.example.breakingnews.models.NewsItem

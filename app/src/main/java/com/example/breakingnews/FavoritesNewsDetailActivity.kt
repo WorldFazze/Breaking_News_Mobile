@@ -2,15 +2,10 @@ package com.example.breakingnews
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.Toast
+import com.example.breakingnews.main.MainActivity
 import com.example.breakingnews.databinding.ActivityFavoritesNewsDetailBinding
 import com.example.breakingnews.db.News
-import com.example.breakingnews.models.NewsItem
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class FavoritesNewsDetailActivity : AppCompatActivity() {
     val db = MainActivity.db

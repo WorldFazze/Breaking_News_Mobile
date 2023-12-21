@@ -3,6 +3,7 @@ package com.example.breakingnews
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.breakingnews.main.MainActivity
 import com.example.breakingnews.databinding.ActivityFavoritesNewsBinding
 import com.example.breakingnews.db.adapters.NewsFavoritesAdapter
 import kotlinx.coroutines.Dispatchers

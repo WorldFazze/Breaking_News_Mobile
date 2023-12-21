@@ -32,6 +32,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.example.breakingnews'
 }
 apply plugin: 'kotlin-kapt'
 
