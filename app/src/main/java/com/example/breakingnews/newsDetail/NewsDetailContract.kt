@@ -1,10 +1,8 @@
 package com.example.breakingnews.newsDetail
 
 import android.content.Intent
-import android.os.Bundle
 import android.widget.ImageView
-import com.example.breakingnews.db.News
-import com.example.breakingnews.models.NewsItem
+import com.example.breakingnews.data.model.News
 
 class NewsDetailContract {
     interface PresenterInterface {

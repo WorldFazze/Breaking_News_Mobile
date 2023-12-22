@@ -1,4 +1,4 @@
-package com.example.breakingnews.db.adapters
+package com.example.breakingnews.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.breakingnews.favoritesNewsDetail.FavoritesNewsDetailActivity
 import com.example.breakingnews.databinding.NewsItemBinding
-import com.example.breakingnews.db.News
+import com.example.breakingnews.data.model.News
 import java.text.SimpleDateFormat
 import java.util.*
 

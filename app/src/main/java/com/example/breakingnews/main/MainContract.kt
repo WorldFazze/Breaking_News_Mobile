@@ -15,6 +15,7 @@ class MainContract {
         fun displayNews(news: List<NewsItem>)
         fun setEmptyList()
         fun setNewsList(newsList: List<NewsItem>)
+        fun showToast(string: String)
     }
 
 }

@@ -2,17 +2,12 @@ package com.example.breakingnews.favoritesNews
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breakingnews.main.MainActivity
 import com.example.breakingnews.databinding.ActivityFavoritesNewsBinding
-import com.example.breakingnews.db.News
-import com.example.breakingnews.db.adapters.NewsFavoritesAdapter
-import com.example.breakingnews.main.MainContract
-import com.example.breakingnews.main.MainPresenter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.example.breakingnews.data.model.News
+import com.example.breakingnews.adapters.NewsFavoritesAdapter
 
 class FavoritesNewsActivity : AppCompatActivity(), FavoritesNewsContract.ViewInterface {
     private lateinit var binding: ActivityFavoritesNewsBinding
@@ -42,5 +37,9 @@ class FavoritesNewsActivity : AppCompatActivity(), FavoritesNewsContract.ViewInt
     override fun setNewsList(news: List<News>) {
         favoritesNewsAdapter = NewsFavoritesAdapter(this, news)
         binding.NewsList.adapter = favoritesNewsAdapter
+    }
+
+    override fun showToast(string: String) {
+        Toast.makeText(applicationContext, string, Toast.LENGTH_SHORT).show()
     }
 }

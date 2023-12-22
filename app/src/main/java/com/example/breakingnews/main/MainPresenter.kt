@@ -1,8 +1,11 @@
 package com.example.breakingnews.main
 
 import android.os.Bundle
-import com.example.breakingnews.api.Instance
-import com.example.breakingnews.db.NewsDatabase
+import com.example.breakingnews.data.api.Instance
+import com.example.breakingnews.data.model.NewsDatabase
+import com.example.breakingnews.domain.useCase.ClearFavoritesNewsUseCase
+import com.example.breakingnews.domain.useCase.LoadNewsUseCase
+import com.example.breakingnews.domain.useCase.SearchNewsUseCase
 import com.example.breakingnews.models.NewsItem
 import com.example.breakingnews.models.NewsResponse
 import kotlinx.coroutines.Dispatchers
@@ -15,22 +18,20 @@ class MainPresenter(
     private var db: NewsDatabase
 ) : MainContract.PresenterInterface {
     private val TAG = "MainPresenter"
+    private val apiService = Instance.api
+    private val loadNewsUseCase = LoadNewsUseCase(apiService,viewInterface)
+    private val searchNewsUseCase = SearchNewsUseCase(apiService, viewInterface)
+    private val clearFavoritesNewsUseCase = ClearFavoritesNewsUseCase(db, viewInterface)
 
     override fun loadNews() {
         GlobalScope.launch {
-            val apiService = Instance.api
-            val response: NewsResponse = apiService.getNews()
-            val news = response.results
-            viewInterface.setNewsList(news)
-            withContext(Dispatchers.Main) {
-                viewInterface.displayNews(news)
-            }
+            loadNewsUseCase.execute()
         }
     }
 
     override fun deleteFavorites() {
         GlobalScope.launch {
-            db.newsDao().deleteNews()
+            clearFavoritesNewsUseCase.execute()
         }
     }
 
@@ -55,6 +56,4 @@ class MainPresenter(
             viewInterface.displayNews(news)
         }
     }
-
-
 }

@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,7 @@ import com.example.breakingnews.favoritesNews.FavoritesNewsActivity
 import com.example.breakingnews.R
 import com.example.breakingnews.adapters.NewsAdapter
 import com.example.breakingnews.databinding.ActivityMainBinding
-import com.example.breakingnews.db.NewsDatabase
+import com.example.breakingnews.data.model.NewsDatabase
 import com.example.breakingnews.models.NewsItem
 
 class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
@@ -146,5 +147,9 @@ class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
 
     override fun setNewsList(newsList: List<NewsItem>) {
         news = newsList
+    }
+
+    override fun showToast(string: String) {
+        Toast.makeText(applicationContext, string, Toast.LENGTH_SHORT).show()
     }
 }

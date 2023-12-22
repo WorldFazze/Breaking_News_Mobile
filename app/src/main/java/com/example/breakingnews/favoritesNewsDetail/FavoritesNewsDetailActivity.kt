@@ -3,7 +3,7 @@ package com.example.breakingnews.favoritesNewsDetail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.breakingnews.databinding.ActivityFavoritesNewsDetailBinding
-import com.example.breakingnews.db.News
+import com.example.breakingnews.data.model.News
 
 class FavoritesNewsDetailActivity : AppCompatActivity(), FavoritesNewsDetailContract.ViewInterface {
     private lateinit var binding: ActivityFavoritesNewsDetailBinding

@@ -1,4 +1,4 @@
-package com.example.breakingnews.api
+package com.example.breakingnews.data.api
 
 import com.example.breakingnews.models.NewsResponse
 import retrofit2.Call

@@ -1,4 +1,4 @@
-package com.example.breakingnews.db
+package com.example.breakingnews.data.model
 
 import androidx.room.*
 

@@ -8,13 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.breakingnews.R
 import com.example.breakingnews.main.MainActivity
 import com.example.breakingnews.databinding.ActivityNewsDetailBinding
-import com.example.breakingnews.db.News
-import com.example.breakingnews.favoritesNewsDetail.FavoritesNewsDetailContract
-import com.example.breakingnews.favoritesNewsDetail.FavoritesNewsDetailPresenter
 import com.example.breakingnews.models.NewsItem
-import com.squareup.picasso.Picasso
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class NewsDetailActivity : AppCompatActivity(), NewsDetailContract.ViewInterface {
     private val db = MainActivity.db

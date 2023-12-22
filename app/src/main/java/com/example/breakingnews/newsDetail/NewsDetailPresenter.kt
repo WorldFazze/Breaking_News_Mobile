@@ -2,20 +2,25 @@ package com.example.breakingnews.newsDetail
 
 import android.content.Intent
 import android.widget.ImageView
-import com.example.breakingnews.db.News
-import com.example.breakingnews.db.NewsDatabase
-import com.example.breakingnews.main.MainContract
-import com.example.breakingnews.models.NewsItem
+import com.example.breakingnews.data.model.News
+import com.example.breakingnews.data.model.NewsDatabase
+import com.example.breakingnews.domain.useCase.AddToFavoritesUseCase
+import com.example.breakingnews.domain.useCase.LoadImageUseCase
+import com.example.breakingnews.domain.useCase.LoadNewsUseCase
+import com.example.breakingnews.domain.useCase.SearchNewsUseCase
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class NewsDetailPresenter(
     private var viewInterface: NewsDetailContract.ViewInterface,
-    private var db: NewsDatabase
+    private var db: NewsDatabase,
 ) : NewsDetailContract.PresenterInterface{
+    private val addToFavoritesUseCase = AddToFavoritesUseCase(db, viewInterface)
+    private val loadImageUseCase = LoadImageUseCase()
+
     override fun loadImage(imageUrl: String?, image: ImageView) {
-        Picasso.get().load(imageUrl).into(image)
+        loadImageUseCase.execute(imageUrl, image)
     }
 
     override fun loadExtra(intent: Intent): News? {
@@ -24,18 +29,7 @@ class NewsDetailPresenter(
 
     override fun onAddToFavoritesClick(intent: Intent) {
         GlobalScope.launch {
-            val newsItem = loadExtra(intent)
-            val news = News(
-                creator = (newsItem?.creator?.get(0) ?: "Автор не указан").toString(),
-                content = newsItem?.content,
-                pubDate = newsItem?.pubDate,
-                source_id = newsItem?.source_id,
-                title = newsItem?.title,
-                image_url = newsItem?.image_url
-            )
-            db.newsDao().insertNews(news)
-            viewInterface.showToast("Новость добавлена в избранные!")
+            addToFavoritesUseCase.execute(loadExtra(intent))
         }
     }
-
 }

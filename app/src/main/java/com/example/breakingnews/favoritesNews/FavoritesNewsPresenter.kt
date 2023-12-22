@@ -1,9 +1,7 @@
 package com.example.breakingnews.favoritesNews
 
-import com.example.breakingnews.api.Instance
-import com.example.breakingnews.db.NewsDatabase
-import com.example.breakingnews.main.MainContract
-import com.example.breakingnews.models.NewsResponse
+import com.example.breakingnews.data.model.NewsDatabase
+import com.example.breakingnews.domain.useCase.LoadFavoritesNewsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -14,13 +12,11 @@ class FavoritesNewsPresenter (
     private var db: NewsDatabase
 ) : FavoritesNewsContract.PresenterInterface {
     private val TAG = "FavoritesNewsPresenter"
+    private val loadFavoritesNewsUseCase = LoadFavoritesNewsUseCase(db, viewInterface)
 
     override fun loadFavoritesNews() {
         GlobalScope.launch(Dispatchers.IO) {
-            val news = db.newsDao().getAllNews()
-            withContext(Dispatchers.Main) {
-                viewInterface.setNewsList(news)
-            }
+            loadFavoritesNewsUseCase.execute()
         }
     }
 }
