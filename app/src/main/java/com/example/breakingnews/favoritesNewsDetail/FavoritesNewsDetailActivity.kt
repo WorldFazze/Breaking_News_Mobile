@@ -19,7 +19,7 @@ class FavoritesNewsDetailActivity : AppCompatActivity(), FavoritesNewsDetailCont
         setContentView(binding.root)
         setupPresenter()
 
-        favoritesNewsDetailPresenter.loadExtra(intent)
+        displayNewsDetails(favoritesNewsDetailPresenter.loadExtra(intent))
     }
 
     override fun displayNewsDetails(newsItem: News?) {

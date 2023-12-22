@@ -6,7 +6,7 @@ import android.content.res.Configuration
 import android.view.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.breakingnews.main.MainActivity
-import com.example.breakingnews.NewsDetailActivity
+import com.example.breakingnews.newsDetail.NewsDetailActivity
 import com.example.breakingnews.databinding.NewsItemBinding
 import com.example.breakingnews.models.NewsItem
 import com.squareup.picasso.Picasso

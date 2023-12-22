@@ -13,8 +13,7 @@ class FavoritesNewsDetailPresenter(
         Picasso.get().load(imageUrl).into(image)
     }
 
-    override fun loadExtra(intent: Intent) {
-        val newsItem = intent.getParcelableExtra<News>("newsItem")
-        viewInterface.displayNewsDetails(newsItem)
+    override fun loadExtra(intent: Intent): News? {
+        return intent.getParcelableExtra("newsItem")
     }
 }

@@ -24,7 +24,7 @@
             android:screenOrientation="sensor"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
-            android:name=".NewsDetailActivity"
+            android:name=".newsDetail.NewsDetailActivity"
             android:exported="false"
             android:screenOrientation="sensor"/>
         <activity

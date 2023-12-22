@@ -8,7 +8,7 @@ class FavoritesNewsDetailContract {
 
     interface PresenterInterface {
         fun loadImage(imageUrl: String?, image: ImageView)
-        fun loadExtra(intent: Intent)
+        fun loadExtra(intent: Intent):News?
     }
 
     interface ViewInterface {
