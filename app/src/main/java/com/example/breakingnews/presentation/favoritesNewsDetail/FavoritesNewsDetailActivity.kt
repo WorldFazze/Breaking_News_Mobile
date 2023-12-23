@@ -1,4 +1,4 @@
-package com.example.breakingnews.favoritesNewsDetail
+package com.example.breakingnews.presentation.favoritesNewsDetail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

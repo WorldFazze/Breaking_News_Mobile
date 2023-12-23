@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".favoritesNews.FavoritesNewsActivity"
+    tools:context=".presentation.favoritesNews.FavoritesNewsActivity"
     android:padding="5dp"
     android:paddingBottom="0dp">
 

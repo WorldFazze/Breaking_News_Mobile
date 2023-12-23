@@ -1,7 +1,7 @@
-package com.example.breakingnews.main
+package com.example.breakingnews.presentation.main
 
 import android.os.Bundle
-import com.example.breakingnews.models.NewsItem
+import com.example.breakingnews.domain.models.NewsItem
 
 class MainContract {
     interface PresenterInterface {

@@ -1,4 +1,4 @@
-package com.example.breakingnews.main
+package com.example.breakingnews.presentation.main
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -10,12 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.example.breakingnews.favoritesNews.FavoritesNewsActivity
+import com.example.breakingnews.presentation.favoritesNews.FavoritesNewsActivity
 import com.example.breakingnews.R
-import com.example.breakingnews.adapters.NewsAdapter
+import com.example.breakingnews.presentation.adapters.NewsAdapter
 import com.example.breakingnews.databinding.ActivityMainBinding
 import com.example.breakingnews.data.model.NewsDatabase
-import com.example.breakingnews.models.NewsItem
+import com.example.breakingnews.domain.models.NewsItem
 
 class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
 

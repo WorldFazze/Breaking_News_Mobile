@@ -1,4 +1,4 @@
-package com.example.breakingnews.newsDetail
+package com.example.breakingnews.presentation.newsDetail
 
 import android.content.Intent
 import android.widget.ImageView

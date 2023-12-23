@@ -1,20 +1,27 @@
 package com.example.breakingnews.domain.useCase
 
 import com.example.breakingnews.data.model.NewsDatabase
-import com.example.breakingnews.favoritesNews.FavoritesNewsContract
-import com.example.breakingnews.main.MainContract
+import com.example.breakingnews.data.repository.ModelRepositoryImpl
+import com.example.breakingnews.domain.repository.ModelRepository
+import com.example.breakingnews.presentation.favoritesNews.FavoritesNewsContract
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class LoadFavoritesNewsUseCase(private val db: NewsDatabase,private val viewInterface: FavoritesNewsContract.ViewInterface) {
+class LoadFavoritesNewsUseCase(
+    private val db: NewsDatabase,
+    private val modelRepository: ModelRepository,
+    private val viewInterface: FavoritesNewsContract.ViewInterface
+) {
     suspend fun execute() {
         try {
-            val news = db.newsDao().getAllNews()
+            val news = modelRepository.getAllNews(db)
             withContext(Dispatchers.Main) {
                 viewInterface.setNewsList(news)
             }
         } catch (e: Exception) {
-            viewInterface.showToast(e.toString())
+            withContext(Dispatchers.Main) {
+                viewInterface.showToast(e.toString())
+            }
         }
     }
 }

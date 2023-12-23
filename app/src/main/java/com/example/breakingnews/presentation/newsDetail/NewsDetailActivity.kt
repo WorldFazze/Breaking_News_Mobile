@@ -1,4 +1,4 @@
-package com.example.breakingnews.newsDetail
+package com.example.breakingnews.presentation.newsDetail
 
 import android.os.Bundle
 import android.view.Menu
@@ -6,9 +6,9 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.breakingnews.R
-import com.example.breakingnews.main.MainActivity
+import com.example.breakingnews.presentation.main.MainActivity
 import com.example.breakingnews.databinding.ActivityNewsDetailBinding
-import com.example.breakingnews.models.NewsItem
+import com.example.breakingnews.domain.models.NewsItem
 
 class NewsDetailActivity : AppCompatActivity(), NewsDetailContract.ViewInterface {
     private val db = MainActivity.db
@@ -24,6 +24,7 @@ class NewsDetailActivity : AppCompatActivity(), NewsDetailContract.ViewInterface
         binding = ActivityNewsDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupPresenter()
         val newsItem = intent.getParcelableExtra<NewsItem>("newsItem")
         displayNewsDetails(newsItem)
     }

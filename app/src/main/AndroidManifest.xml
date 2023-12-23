@@ -15,20 +15,20 @@
         android:theme="@style/Theme.BreakingNews"
         tools:targetApi="31">
         <activity
-            android:name=".favoritesNewsDetail.FavoritesNewsDetailActivity"
+            android:name=".presentation.favoritesNewsDetail.FavoritesNewsDetailActivity"
             android:exported="false"
             android:screenOrientation="sensor"/>
         <activity
-            android:name=".favoritesNews.FavoritesNewsActivity"
+            android:name=".presentation.favoritesNews.FavoritesNewsActivity"
             android:exported="false"
             android:screenOrientation="sensor"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
-            android:name=".newsDetail.NewsDetailActivity"
+            android:name=".presentation.newsDetail.NewsDetailActivity"
             android:exported="false"
             android:screenOrientation="sensor"/>
         <activity
-            android:name=".main.MainActivity"
+            android:name=".presentation.main.MainActivity"
             android:exported="true"
             android:screenOrientation="sensor"
             android:configChanges="keyboardHidden|orientation|screenSize">

@@ -1,14 +1,14 @@
-package com.example.breakingnews.adapters
+package com.example.breakingnews.presentation.adapters
 
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.view.*
 import androidx.recyclerview.widget.RecyclerView
-import com.example.breakingnews.main.MainActivity
-import com.example.breakingnews.newsDetail.NewsDetailActivity
+import com.example.breakingnews.presentation.main.MainActivity
+import com.example.breakingnews.presentation.newsDetail.NewsDetailActivity
 import com.example.breakingnews.databinding.NewsItemBinding
-import com.example.breakingnews.models.NewsItem
+import com.example.breakingnews.domain.models.NewsItem
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*

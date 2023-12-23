@@ -1,13 +1,13 @@
-package com.example.breakingnews.favoritesNews
+package com.example.breakingnews.presentation.favoritesNews
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.breakingnews.main.MainActivity
+import com.example.breakingnews.presentation.main.MainActivity
 import com.example.breakingnews.databinding.ActivityFavoritesNewsBinding
 import com.example.breakingnews.data.model.News
-import com.example.breakingnews.adapters.NewsFavoritesAdapter
+import com.example.breakingnews.presentation.adapters.NewsFavoritesAdapter
 
 class FavoritesNewsActivity : AppCompatActivity(), FavoritesNewsContract.ViewInterface {
     private lateinit var binding: ActivityFavoritesNewsBinding

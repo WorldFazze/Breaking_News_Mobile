@@ -1,4 +1,4 @@
-package com.example.breakingnews.favoritesNews
+package com.example.breakingnews.presentation.favoritesNews
 
 import com.example.breakingnews.data.model.News
 

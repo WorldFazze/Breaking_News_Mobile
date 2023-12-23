@@ -1,6 +1,6 @@
 package com.example.breakingnews.data.api
 
-import com.example.breakingnews.models.NewsResponse
+import com.example.breakingnews.domain.models.NewsResponse
 import retrofit2.Call
 import retrofit2.http.*
 

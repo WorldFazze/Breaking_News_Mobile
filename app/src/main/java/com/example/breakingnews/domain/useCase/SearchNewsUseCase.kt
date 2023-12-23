@@ -1,24 +1,27 @@
 package com.example.breakingnews.domain.useCase
 
-import com.example.breakingnews.data.api.ApiService
-import com.example.breakingnews.main.MainContract
-import com.example.breakingnews.models.NewsResponse
+import com.example.breakingnews.data.repository.NewsRepositoryImpl
+import com.example.breakingnews.presentation.main.MainContract
+import com.example.breakingnews.domain.models.NewsResponse
+import com.example.breakingnews.domain.repository.NewsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class SearchNewsUseCase(private val apiService: ApiService, private val viewInterface: MainContract.ViewInterface) {
+class SearchNewsUseCase(private val newsRepository: NewsRepository, private val viewInterface: MainContract.ViewInterface) {
 
     suspend fun execute(query: String) {
         try {
             viewInterface.setEmptyList()
-            val response: NewsResponse = apiService.searchNews(query)
+            val response = newsRepository.searchNews(query)
             val news = response.results
             viewInterface.setNewsList(news)
             withContext(Dispatchers.Main) {
                 viewInterface.displayNews(news)
             }
         } catch (e: Exception) {
-            viewInterface.showToast(e.toString())
+            withContext(Dispatchers.Main) {
+                viewInterface.showToast(e.toString())
+            }
         }
     }
 }

@@ -2,10 +2,17 @@ package com.example.breakingnews.domain.useCase
 
 import com.example.breakingnews.data.model.News
 import com.example.breakingnews.data.model.NewsDatabase
-import com.example.breakingnews.main.MainContract
-import com.example.breakingnews.newsDetail.NewsDetailContract
+import com.example.breakingnews.data.repository.ModelRepositoryImpl
+import com.example.breakingnews.domain.repository.ModelRepository
+import com.example.breakingnews.presentation.newsDetail.NewsDetailContract
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class AddToFavoritesUseCase(private val db: NewsDatabase, private val viewInterface: NewsDetailContract.ViewInterface) {
+class AddToFavoritesUseCase(
+    private val db: NewsDatabase,
+    private val modelRepository: ModelRepository,
+    private val viewInterface: NewsDetailContract.ViewInterface,
+) {
 
     suspend fun execute(newsItem: News?) {
         try {
@@ -17,9 +24,14 @@ class AddToFavoritesUseCase(private val db: NewsDatabase, private val viewInterf
                 title = newsItem?.title,
                 image_url = newsItem?.image_url
             )
-            db.newsDao().insertNews(news)
+            modelRepository.insertNews(db, news)
+            withContext(Dispatchers.Main) {
+                viewInterface.showToast("Новость успешно добавлена в избранные")
+            }
         } catch (e: Exception) {
-            viewInterface.showToast(e.toString())
+            withContext(Dispatchers.Main) {
+                viewInterface.showToast(e.toString())
+            }
         }
     }
 }
