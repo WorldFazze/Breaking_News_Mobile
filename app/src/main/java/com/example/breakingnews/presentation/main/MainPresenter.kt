@@ -4,9 +4,9 @@ import android.os.Bundle
 import com.example.breakingnews.data.model.NewsDatabase
 import com.example.breakingnews.data.repository.ModelRepositoryImpl
 import com.example.breakingnews.data.repository.NewsRepositoryImpl
-import com.example.breakingnews.domain.useCase.ClearFavoritesNewsUseCase
-import com.example.breakingnews.domain.useCase.LoadNewsUseCase
-import com.example.breakingnews.domain.useCase.SearchNewsUseCase
+import com.example.breakingnews.domain.interactors.ClearFavoritesNewsUseCase
+import com.example.breakingnews.domain.interactors.LoadNewsUseCase
+import com.example.breakingnews.domain.interactors.SearchNewsUseCase
 import com.example.breakingnews.domain.models.NewsItem
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

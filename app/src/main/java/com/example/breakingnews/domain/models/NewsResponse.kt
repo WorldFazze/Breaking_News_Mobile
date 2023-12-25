@@ -6,6 +6,3 @@ data class NewsResponse(
     val results: List<NewsItem>,
     val nextPage: String?
 )
-
-
-

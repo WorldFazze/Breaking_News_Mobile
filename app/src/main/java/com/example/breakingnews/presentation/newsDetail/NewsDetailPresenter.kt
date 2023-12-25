@@ -5,8 +5,8 @@ import android.widget.ImageView
 import com.example.breakingnews.data.model.News
 import com.example.breakingnews.data.model.NewsDatabase
 import com.example.breakingnews.data.repository.ModelRepositoryImpl
-import com.example.breakingnews.domain.useCase.AddToFavoritesUseCase
-import com.example.breakingnews.domain.useCase.LoadImageUseCase
+import com.example.breakingnews.domain.interactors.AddToFavoritesUseCase
+import com.example.breakingnews.domain.interactors.LoadImageUseCase
 import com.example.breakingnews.domain.models.NewsItem
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

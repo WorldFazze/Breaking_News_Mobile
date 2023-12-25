@@ -2,7 +2,7 @@ package com.example.breakingnews.presentation.favoritesNews
 
 import com.example.breakingnews.data.model.NewsDatabase
 import com.example.breakingnews.data.repository.ModelRepositoryImpl
-import com.example.breakingnews.domain.useCase.LoadFavoritesNewsUseCase
+import com.example.breakingnews.domain.interactors.LoadFavoritesNewsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

@@ -1,8 +1,7 @@
-package com.example.breakingnews.domain.useCase
+package com.example.breakingnews.domain.interactors
 
 import com.example.breakingnews.data.model.News
 import com.example.breakingnews.data.model.NewsDatabase
-import com.example.breakingnews.data.repository.ModelRepositoryImpl
 import com.example.breakingnews.domain.repository.ModelRepository
 import com.example.breakingnews.presentation.newsDetail.NewsDetailContract
 import kotlinx.coroutines.Dispatchers
